@@ -30,7 +30,7 @@ public class JournalEntryControllerV2 {
     @PostMapping
     public ResponseEntity<JournalEntry> createEntry (@RequestBody JournalEntry myEntry){
         try {
-            myEntry.setDate(LocalDateTime.now());
+           // myEntry.setDate(LocalDateTime.now());
             journalEntryService.saveEntry(myEntry);
             return new ResponseEntity<>(myEntry,HttpStatus.CREATED);
 
@@ -39,7 +39,7 @@ public class JournalEntryControllerV2 {
         }
     }
     @GetMapping("id/{myId}")
-    public ResponseEntity<JournalEntry> getJournalEntryById(@PathVariable ObjectId myId){
+    public ResponseEntity<?> getJournalEntryById(@PathVariable ObjectId myId){
         Optional<JournalEntry>journalEntry = journalEntryService.findById(myId);
         if(journalEntry.isPresent()){
            return new ResponseEntity<>(journalEntry.get(), HttpStatus.OK);
@@ -48,6 +48,7 @@ public class JournalEntryControllerV2 {
     }
     @DeleteMapping("id/{myId}")
     public ResponseEntity<?> deleteJournalEntryById(@PathVariable ObjectId myId) {
+        journalEntryService.deleteBYId(myId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PutMapping("/id/{myId}")
