@@ -23,6 +23,8 @@ public class JournalEntry {
 
     private LocalDateTime date;
 
+    private String lastname;
+
 
 }
 
